@@ -162,6 +162,8 @@ do_install:append:class-native() {
     rm -rf ${D}/${PHP_LIBDIR}/php/.[a-z]*
 }
 
+ACLOCALDIR = "${STAGING_DATADIR}/aclocal"
+
 do_install:prepend() {
     cat ${ACLOCALDIR}/libtool.m4 ${ACLOCALDIR}/lt~obsolete.m4 ${ACLOCALDIR}/ltoptions.m4 \
         ${ACLOCALDIR}/ltsugar.m4 ${ACLOCALDIR}/ltversion.m4 > ${S}/build/libtool.m4
