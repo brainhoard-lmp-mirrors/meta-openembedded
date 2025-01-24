@@ -136,10 +136,7 @@ LDFLAGS:append:riscv64 = " -latomic"
 
 EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
 
-acpaths = ""
-
 do_configure:prepend () {
-    rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
     find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_SBINDIR_NATIVE}/httpd!'
 }
 
@@ -160,14 +157,6 @@ do_install:append:class-native() {
     rm -rf ${D}/${PHP_LIBDIR}/php/.registry
     rm -rf ${D}/${PHP_LIBDIR}/php/.channels
     rm -rf ${D}/${PHP_LIBDIR}/php/.[a-z]*
-}
-
-do_install:prepend() {
-    cat ${STAGING_DATADIR}/aclocal/libtool.m4 \
-    ${STAGING_DATADIR}/aclocal/lt~obsolete.m4 \
-    ${STAGING_DATADIR}/aclocal/ltoptions.m4 \
-    ${STAGING_DATADIR}/aclocal/ltsugar.m4 \
-    ${STAGING_DATADIR}/aclocal/ltversion.m4 > ${S}/build/libtool.m4
 }
 
 do_install:prepend:class-target() {
